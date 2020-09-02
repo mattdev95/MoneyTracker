@@ -17,11 +17,11 @@ public class CalculateMoney extends MoneyTracker {
         super(enterMoney, timesToEnter);
     }
     public void startProgram(){
-       // while (!super.keyInput.toString().equals("X")){
-            enterAmount();
+        // run each of the methods
+           enterAmount();
             enterTimes();
             getResults();
-       // }
+
 
 
 
@@ -32,9 +32,14 @@ public class CalculateMoney extends MoneyTracker {
     //    var newMoney = new MoneyTracker(0,0);
         // get the amount from the user
         try{
-
                 System.out.println("Please enter the amount of money: ");
-                amountMoney = super.keyInput.nextDouble();
+
+            while (!super.keyInput.hasNextDouble()) {
+                System.out.println("You have entered the wrong input, only numbers!");
+                super.keyInput.next();
+            }
+            amountMoney = super.keyInput.nextDouble();
+
 
 
             // get the amount of money with vat
@@ -42,26 +47,36 @@ public class CalculateMoney extends MoneyTracker {
         } catch (InputMismatchException t){
             System.out.println("You have entered the wrong value!");
             // redo entry
-            amountMoney = 0;
             enterAmount();
 
         }
+
 
 
     }
     // allow entry of the amount of times you want to enter you money into
     private void enterTimes(){
         try{
+
             System.out.print("Please enter the amount of times you need to enter a value: ");
+            while (!super.keyInput.hasNextInt()) {
+                System.out.println("You have entered the wrong input, only numbers!");
+                super.keyInput.next();
+            }
             timeToEnter = super.keyInput.nextInt();
             // you need to store each of the values in an array
             // check if the value entered is correct
             tracker = new CalculateMoney(amountMoney, timeToEnter);
-
+            // create a flexible array
             values = new double[timeToEnter];
 
             for(int i = 0; i < timeToEnter; i++){
+
                 System.out.println("Please enter your desired value: ");
+                while (!super.keyInput.hasNextDouble()) {
+                    System.out.println("You have entered the wrong input, only numbers!");
+                    super.keyInput.next();
+                }
                 // allow the iteration of each of the values
                 values[i] = super.keyInput.nextDouble();
             }
@@ -101,6 +116,8 @@ public class CalculateMoney extends MoneyTracker {
         }catch (NullPointerException e){
             System.out.println("Something has gone wrong");
         }
+        var d = new MainMenu(3,3);
+        d.startMainMenu();
 
     }
     // using polymorphism here

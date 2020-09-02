@@ -7,8 +7,8 @@ public class Main {
 
     public static void main(String[] args) {
         // add in some default values
-        var newCalMoney = new CalculateMoney(12,12);
-        newCalMoney.startProgram();
+        var newCalMoney = new MainMenu(12,12);
+        newCalMoney.startMainMenu();
 
     }
 }
