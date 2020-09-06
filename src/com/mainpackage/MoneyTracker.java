@@ -9,7 +9,7 @@ public class MoneyTracker {
 
     public final Scanner keyInput = new Scanner(System.in);
 
-    // set the contructor
+    // set the constructor
     public MoneyTracker(double enterMoney, int timesToEnter){
         setEnterMoney(enterMoney);
         setTimeToEnter(timesToEnter);
@@ -39,7 +39,7 @@ public class MoneyTracker {
         return timesToEnter;
     }
 
-    // this will be overried in other classes
+    // this will be override in other classes
     public double calculateVAT(){
         // set a default
         return 0;
