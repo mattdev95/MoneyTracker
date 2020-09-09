@@ -24,9 +24,12 @@ public class MainMenu extends MoneyTracker {
                         var newCalMon = new CalculateMoney(2, 2);
                         newCalMon.startProgram();
                     case "2":
-                        System.out.println("not available");
+                        var newExMon = new ExchangeMoney(2,2);
+                        newExMon.chooseOption();
                     case "3":
+                        System.out.println("Thank you and goodbye!");
                         System.exit(0);
+
 
                 }
             }
@@ -44,7 +47,10 @@ public class MainMenu extends MoneyTracker {
         } catch(NoSuchElementException r) {
             System.out.println("Please re-enter your option!");
             startMainMenu();
+        } finally{
+            System.out.println("Unexpected error has occurred");
         }
+
 
     }
 }

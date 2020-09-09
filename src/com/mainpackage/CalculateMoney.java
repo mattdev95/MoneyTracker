@@ -4,13 +4,12 @@ import java.util.InputMismatchException;
 
 public class CalculateMoney extends MoneyTracker {
     // setup your variables
-    double amountMoney;
-    double valueWithVAT;
-    int timeToEnter;
-    double[] values;
-    double total;
-    double remainingTotal;
-    MoneyTracker tracker;
+    private double amountMoney;
+    private double valueWithVAT;
+    private  int timeToEnter;
+    private double[] values;
+    private double remainingTotal;
+    private double total;
 
     // create the constructor from the parent class
     public CalculateMoney(double enterMoney, int timesToEnter) {
@@ -24,7 +23,8 @@ public class CalculateMoney extends MoneyTracker {
 
     }
     // get the money from the user and then do some magic to it!
-    private void enterAmount() {
+    @Override
+    public void enterAmount() {
 
         try {
             System.out.println("Please enter the amount of money: ");
@@ -58,7 +58,7 @@ public class CalculateMoney extends MoneyTracker {
             timeToEnter = super.keyInput.nextInt();
             // you need to store each of the values in an array
             // check if the value entered is correct
-            tracker = new CalculateMoney(amountMoney, timeToEnter);
+            MoneyTracker tracker = new CalculateMoney(amountMoney, timeToEnter);
             // create a flexible array
             values = new double[timeToEnter];
 
@@ -86,6 +86,16 @@ public class CalculateMoney extends MoneyTracker {
         }
         return total;
     }
+    // get the amount of the money that is left
+    public double moneyRemaining(){
+        // so if they have not calculated the using option 1, they will be directed back to the main menu.
+        if(remainingTotal == 0){
+            System.out.println("You have not calculated the profits, go back to option 1");
+            var newMenu = new MainMenu(2,2);
+            newMenu.startMainMenu();
+        }
+        return remainingTotal;
+    }
 
     // get the results
     private void getResults() {
@@ -98,7 +108,7 @@ public class CalculateMoney extends MoneyTracker {
                 valueWithVAT = 0;
                 timeToEnter = 0;
                 total = 0;
-                remainingTotal = 0;
+               // remainingTotal = 0;
                 // go back to the start
                 startProgram();
             } else {

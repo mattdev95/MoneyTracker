@@ -44,4 +44,8 @@ public class MoneyTracker {
         // set a default
         return 0;
     }
+    // create an amount of money method
+    public void enterAmount(){
+        // empty
+    }
 }
