@@ -10,7 +10,7 @@ public class MainMenu extends MoneyTracker {
     }
 
     public void startMainMenu() throws NullPointerException {
-        System.out.println("Welcome to the money tracker please pick an option: \n Option 1: Enter money to check if you have enough for your projects \n " + "Option 2: Check your remaining balance \n Option 3: Exit");
+        System.out.println("Welcome to the money tracker please pick an option: \n Option 1: Enter money to check if you have enough for your projects \n " + "Option 2: Exchange your money \n Option 3: Exit");
         System.out.print("Please enter an option:");
         // make sure the user enter the correct input
         try {

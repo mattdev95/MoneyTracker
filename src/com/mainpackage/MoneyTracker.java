@@ -6,6 +6,7 @@ public class MoneyTracker {
     // create your variable for the amount of money you are going to enter, the amount you are entering, the
     private double enterMoney;
     private int timesToEnter;
+    public double remainingTotal;
 
     public final Scanner keyInput = new Scanner(System.in);
 
@@ -17,7 +18,7 @@ public class MoneyTracker {
     }
     private void setEnterMoney(double enterMoney){
         if(enterMoney < 1){
-            throw new IllegalArgumentException("How you have entered a value too low!");
+            throw new IllegalArgumentException("You need to enter more money!");
         }
         else{
             this.enterMoney = enterMoney;
@@ -27,8 +28,8 @@ public class MoneyTracker {
         return enterMoney;
     }
     private void setTimeToEnter(int timesToEnter){
-        if(enterMoney < 1){
-            throw new IllegalArgumentException("How you have entered a value too low!");
+        if(timesToEnter < 1){
+            throw new IllegalArgumentException("You need to enter more times to enter!");
         }
         else{
             this.timesToEnter = timesToEnter;
@@ -37,6 +38,18 @@ public class MoneyTracker {
 
     private int getTimesToEnter(){
         return timesToEnter;
+    }
+
+
+    public void setRemainingTotal(double remainingTotal){
+
+            this.remainingTotal = remainingTotal;
+
+
+    }
+    // make this public
+    public double getRemainingTotal(){
+        return remainingTotal;
     }
 
     // this will be override in other classes

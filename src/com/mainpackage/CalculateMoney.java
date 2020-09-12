@@ -1,5 +1,6 @@
 package com.mainpackage;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 
 public class CalculateMoney extends MoneyTracker {
@@ -8,8 +9,9 @@ public class CalculateMoney extends MoneyTracker {
     private double valueWithVAT;
     private  int timeToEnter;
     private double[] values;
-    private double remainingTotal;
-    private double total;
+    public double remainingTotal;
+    private double total = 0;
+    private MoneyTracker newMonTrack = new MoneyTracker(5, 5);
 
     // create the constructor from the parent class
     public CalculateMoney(double enterMoney, int timesToEnter) {
@@ -27,7 +29,7 @@ public class CalculateMoney extends MoneyTracker {
     public void enterAmount() {
 
         try {
-            System.out.println("Please enter the amount of money: ");
+            System.out.print("Please enter the amount of money: ");
 
             while (!super.keyInput.hasNextDouble()) {
                 System.out.println("You have entered the wrong input, only numbers!");
@@ -64,13 +66,14 @@ public class CalculateMoney extends MoneyTracker {
 
             for (int i = 0; i < timeToEnter; i++) {
 
-                System.out.println("Please enter your desired value: ");
+                System.out.print("Please enter your desired value: ");
                 while (!super.keyInput.hasNextDouble()) {
                     System.out.println("You have entered the wrong input, only numbers!");
                     super.keyInput.next();
                 }
                 // allow the iteration of each of the values
                 values[i] = super.keyInput.nextDouble();
+              //  System.out.println(values[i]);
             }
         } catch(InputMismatchException q) {
             System.out.println("You have entered the wrong value!");
@@ -80,28 +83,25 @@ public class CalculateMoney extends MoneyTracker {
 
     }
     // add all the values here
-    private double countMoney() {
-        for (double value: values) {
+   private double countMoney() {
+        for (double value : values) {
             total = total + value;
-        }
+       }
         return total;
     }
     // get the amount of the money that is left
-    public double moneyRemaining(){
-        // so if they have not calculated the using option 1, they will be directed back to the main menu.
-        if(remainingTotal == 0){
-            System.out.println("You have not calculated the profits, go back to option 1");
-            var newMenu = new MainMenu(2,2);
-            newMenu.startMainMenu();
-        }
-        return remainingTotal;
-    }
+
+
 
     // get the results
     private void getResults() {
         try {
+
             remainingTotal = amountMoney - countMoney();
-            if (countMoney() > amountMoney) {
+            newMonTrack.setRemainingTotal(remainingTotal);
+
+            if (remainingTotal > amountMoney || remainingTotal < 0) {
+
                 System.out.println("You have overspend your amount! \n You need to re-enter again!");
                 // reset all the values
                 amountMoney = 0;
@@ -111,13 +111,15 @@ public class CalculateMoney extends MoneyTracker {
                // remainingTotal = 0;
                 // go back to the start
                 startProgram();
-            } else {
+            }
+
+            else {
                 System.out.println("The total amount you entered is " + amountMoney + " and your costs are and you remain with " + remainingTotal);
             }
         } catch(NullPointerException e) {
             System.out.println("Something has gone wrong");
         }
-        var d = new MainMenu(3, 3);
+        var d = new MainMenu(7, 7);
         d.startMainMenu();
 
     }

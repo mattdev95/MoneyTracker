@@ -7,6 +7,7 @@ public class ExchangeMoney extends MoneyTracker {
     private String option;
     private double enteredAmount;
     private double calAmount;
+    private double rem;
 
 
     public ExchangeMoney(double enterMoney, int timesToEnter) {
@@ -37,6 +38,18 @@ public class ExchangeMoney extends MoneyTracker {
             chooseOption();
         }
     }
+    public double moneyRemaining(){
+
+        // so if they have not calculated the using option 1, they will be directed back to the main menu.
+        var newMonTrack = new MoneyTracker(2,2);
+        System.out.println(newMonTrack.getRemainingTotal());
+        if(newMonTrack.getRemainingTotal() == 0){
+            System.out.println("You have not calculated the profits, go back to option 1");
+            var newMenu = new MainMenu(2,2);
+            newMenu.startMainMenu();
+        }
+        return newMonTrack.getRemainingTotal();
+    }
 
     // allow the user to enter the amount of money they need
     @Override
@@ -44,6 +57,9 @@ public class ExchangeMoney extends MoneyTracker {
         // you need to allow entry for the user to enter their dersired amount
 
         try{
+            // print the remainging amount if it exists
+
+
             System.out.print("Please enter the amount of money: ");
             // check the user has entered the right amount of money
             while (!super.keyInput.hasNextDouble()) {
@@ -59,6 +75,7 @@ public class ExchangeMoney extends MoneyTracker {
             enterAmount();
         } catch (NullPointerException w){
             System.out.println("Something has gone wrong!");
+            System.exit(0);
         }
     }
     private double findExchangeRate(double amount){
@@ -66,10 +83,7 @@ public class ExchangeMoney extends MoneyTracker {
         return amount * 0.90;
     }
     // retrieve the amount of money from CalculateMoney class
-    private double remainingMoney(){
-        var remainTot = new CalculateMoney(2,2) ;
-         return remainTot.moneyRemaining();
-    }
+
 
     // allow the user to exchange the money of there directed amount, so depending if the user picks option 1,
     // it will use the money entered here or if the user picked option 2, it will calcuate the exchange rate from
@@ -82,7 +96,7 @@ public class ExchangeMoney extends MoneyTracker {
                 System.out.println("The exchange money is £" + findExchangeRate(enteredAmount));
 
             } else {
-                System.out.println("The money you have remaining exchanged into £" + findExchangeRate(remainingMoney()));
+                System.out.println("The money you have remaining exchanged into £" + findExchangeRate(moneyRemaining()));
 
             }
             // go back to the main menu
