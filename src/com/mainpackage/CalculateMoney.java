@@ -6,11 +6,15 @@ import java.util.InputMismatchException;
 public class CalculateMoney extends MoneyTracker {
     // setup your variables
     private double amountMoney;
-    private double valueWithVAT;
+
     private  int timeToEnter;
-    private double[] values;
     public double remainingTotal;
     private double total = 0;
+    // create an array of values
+    private double[] values;
+    // not used
+    private double valueWithVAT;
+    // create a money tracker object to access certain methods
     private MoneyTracker newMonTrack = new MoneyTracker(5, 5);
 
     // create the constructor from the parent class
@@ -113,7 +117,7 @@ public class CalculateMoney extends MoneyTracker {
                 valueWithVAT = 0;
                 timeToEnter = 0;
                 total = 0;
-               // remainingTotal = 0;
+                remainingTotal = 0;
                 // go back to the start
                 startProgram();
             }

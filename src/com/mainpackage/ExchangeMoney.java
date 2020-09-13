@@ -21,10 +21,7 @@ public class ExchangeMoney extends MoneyTracker {
                 "Option 2 - Exchange the amount of money you have remaining ");
         System.out.print("Please enter an option: ");
         try {
-//            while (!super.keyInput.hasNext()) {
-//                System.out.println("You must enter a valid input!");
-//                super.keyInput.next();
-//            }
+            // allow user to enter an option
             option = keyInput.next();
             if (option.contains("1") || option.contains("2")) {
 
@@ -35,6 +32,7 @@ public class ExchangeMoney extends MoneyTracker {
                         exchangeMoney();
                 }
             } else{
+                // using recursion here as a temporary fix, not the best way to do this.
                 System.out.println("You have entered the wrong value");
                 chooseOption();
             }
@@ -49,8 +47,10 @@ public class ExchangeMoney extends MoneyTracker {
 
         // so if they have not calculated the using option 1, they will be directed back to the main menu.
         var newMonTrack = new MoneyTracker(2,2);
+        // to check if the user has entered money into option 1
         if(newMonTrack.getRemainingTotal() == 0){
             System.out.println("You have not calculated your expenditure, go back to option 1");
+            // set default values, have no use here
             var newMenu = new MainMenu(2,2);
             newMenu.startMainMenu();
         }
