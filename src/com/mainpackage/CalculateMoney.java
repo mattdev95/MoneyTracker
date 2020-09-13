@@ -30,20 +30,22 @@ public class CalculateMoney extends MoneyTracker {
 
         try {
             System.out.print("Please enter the amount of money: ");
-
-            while (!super.keyInput.hasNextDouble()) {
+            // check the user has entered the correct value
+            while (!keyInput.hasNextDouble()) {
                 System.out.println("You have entered the wrong input, only numbers!");
-                super.keyInput.next();
+                System.out.print("Please enter the amount of money: ");
+                keyInput.next();
             }
-            amountMoney = super.keyInput.nextDouble();
+            // set the variable the value entered
+            amountMoney = keyInput.nextDouble();
 
             // get the amount of money with vat
             valueWithVAT = amountMoney - calculateVAT();
+
         } catch(InputMismatchException t) {
             System.out.println("You have entered the wrong value!");
-            // redo entry
+            // redo entry only if the while loop does not work
             enterAmount();
-
         }
 
     }
@@ -52,27 +54,30 @@ public class CalculateMoney extends MoneyTracker {
         try {
 
             System.out.print("Please enter the amount of times you need to enter a value: ");
-            while (!super.keyInput.hasNextInt()) {
+            // if the value is not correct
+            while (!keyInput.hasNextInt()) {
                 System.out.println("You have entered the wrong input, only numbers!");
-                super.keyInput.next();
+                keyInput.next();
             }
+            // set the variable the value if correct
+            timeToEnter = keyInput.nextInt();
 
-            timeToEnter = super.keyInput.nextInt();
             // you need to store each of the values in an array
             // check if the value entered is correct
             MoneyTracker tracker = new CalculateMoney(amountMoney, timeToEnter);
             // create a flexible array
             values = new double[timeToEnter];
-
+            // this will go through the number of times you have entered to enter a value
             for (int i = 0; i < timeToEnter; i++) {
 
                 System.out.print("Please enter your desired value: ");
-                while (!super.keyInput.hasNextDouble()) {
+                // if the input is incorrect
+                while (!keyInput.hasNextDouble()) {
                     System.out.println("You have entered the wrong input, only numbers!");
-                    super.keyInput.next();
+                    keyInput.next();
                 }
                 // allow the iteration of each of the values
-                values[i] = super.keyInput.nextDouble();
+                values[i] = keyInput.nextDouble();
               //  System.out.println(values[i]);
             }
         } catch(InputMismatchException q) {
@@ -84,22 +89,22 @@ public class CalculateMoney extends MoneyTracker {
     }
     // add all the values here
    private double countMoney() {
+        // go through each value in the array
         for (double value : values) {
             total = total + value;
        }
         return total;
     }
-    // get the amount of the money that is left
-
-
 
     // get the results
     private void getResults() {
         try {
-
+            // get the remaining total
             remainingTotal = amountMoney - countMoney();
+            // set the remaining total
             newMonTrack.setRemainingTotal(remainingTotal);
 
+            // check if the user entered too much money to add up the expenditure
             if (remainingTotal > amountMoney || remainingTotal < 0) {
 
                 System.out.println("You have overspend your amount! \n You need to re-enter again!");
@@ -114,7 +119,10 @@ public class CalculateMoney extends MoneyTracker {
             }
 
             else {
-                System.out.println("The total amount you entered is " + amountMoney + " and your costs are and you remain with " + remainingTotal);
+                System.out.println("************************************************************************************************************************");
+                System.out.println("The total amount you entered is €" + String.format( "%.2f", amountMoney )  + " and your costs are and you remain with €" +
+                        String.format( "%.2f", remainingTotal )  );
+                System.out.println("************************************************************************************************************************");
             }
         } catch(NullPointerException e) {
             System.out.println("Something has gone wrong");
@@ -126,6 +134,6 @@ public class CalculateMoney extends MoneyTracker {
     // using polymorphism here
     @Override
     public double calculateVAT() {
-        return amountMoney * 0.5;
+        return amountMoney * 0.2;
     }
 }

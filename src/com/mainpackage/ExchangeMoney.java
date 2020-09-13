@@ -6,9 +6,6 @@ public class ExchangeMoney extends MoneyTracker {
     // setup your variables
     private String option;
     private double enteredAmount;
-    private double calAmount;
-    private double rem;
-
 
     public ExchangeMoney(double enterMoney, int timesToEnter) {
         super(enterMoney, timesToEnter);
@@ -23,28 +20,37 @@ public class ExchangeMoney extends MoneyTracker {
         System.out.println("Please choose an option: \n Option 1 - Enter an amount of money to exchange \n " +
                 "Option 2 - Exchange the amount of money you have remaining ");
         System.out.print("Please enter an option: ");
-        try{
-            option = super.keyInput.next();
+        try {
+//            while (!super.keyInput.hasNext()) {
+//                System.out.println("You must enter a valid input!");
+//                super.keyInput.next();
+//            }
+            option = keyInput.next();
+            if (option.contains("1") || option.contains("2")) {
 
-            switch(option){
-                case "1":
-                    enterAmount();
-                case "2":
-                    exchangeMoney();
+                switch (option) {
+                    case "1":
+                        enterAmount();
+                    case "2":
+                        exchangeMoney();
+                }
+            } else{
+                System.out.println("You have entered the wrong value");
+                chooseOption();
             }
 
-        } catch (InputMismatchException e){
-            System.out.println("You have entered the wrong value");
-            chooseOption();
-        }
+            } catch(InputMismatchException e){
+                System.out.println("You have entered the wrong value");
+                chooseOption();
+            }
+
     }
     public double moneyRemaining(){
 
         // so if they have not calculated the using option 1, they will be directed back to the main menu.
         var newMonTrack = new MoneyTracker(2,2);
-        System.out.println(newMonTrack.getRemainingTotal());
         if(newMonTrack.getRemainingTotal() == 0){
-            System.out.println("You have not calculated the profits, go back to option 1");
+            System.out.println("You have not calculated your expenditure, go back to option 1");
             var newMenu = new MainMenu(2,2);
             newMenu.startMainMenu();
         }
@@ -57,17 +63,17 @@ public class ExchangeMoney extends MoneyTracker {
         // you need to allow entry for the user to enter their dersired amount
 
         try{
+
             // print the remainging amount if it exists
-
-
             System.out.print("Please enter the amount of money: ");
-            // check the user has entered the right amount of money
-            while (!super.keyInput.hasNextDouble()) {
-                System.out.println("You have entered the wrong input, only numbers!");
-                super.keyInput.next();
-            }
-            enteredAmount = super.keyInput.nextDouble();
 
+            // check the user has entered the right amount of money
+            while (!keyInput.hasNextDouble()) {
+                System.out.println("You have entered the wrong input, only numbers!");
+                keyInput.next();
+            }
+            // if the input is equal a double value
+            enteredAmount = keyInput.nextDouble();
             exchangeMoney();
 
         } catch (InputMismatchException r){
@@ -93,13 +99,18 @@ public class ExchangeMoney extends MoneyTracker {
 
         try{
             if(option.equals("1")){
-                System.out.println("The exchange money is £" + findExchangeRate(enteredAmount));
+                System.out.println("***************************************************************************************");
+                System.out.println("The exchange money is £" + String.format( "%.2f", findExchangeRate(enteredAmount) )  );
+                System.out.println("***************************************************************************************");
 
             } else {
-                System.out.println("The money you have remaining exchanged into £" + findExchangeRate(moneyRemaining()));
+                System.out.println("***************************************************************************************");
+                System.out.println("The money you have remaining exchanged into £" +  String.format( "%.2f", findExchangeRate(moneyRemaining())) );
+                System.out.println("***************************************************************************************");
 
             }
             // go back to the main menu
+            // add some default values
             var newMain = new MainMenu(2,2);
             newMain.startMainMenu();
         } catch (InputMismatchException d){

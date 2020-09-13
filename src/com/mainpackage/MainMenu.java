@@ -15,7 +15,7 @@ public class MainMenu extends MoneyTracker {
         // make sure the user enter the correct input
         try {
             // allow the user to enter a value
-            option = super.keyInput.next();
+            option = keyInput.next();
             // to check if the user entered the correct value
             if (option.contains("1") || option.contains("2") || option.contains("3")) {
 
@@ -30,10 +30,8 @@ public class MainMenu extends MoneyTracker {
                         System.out.println("Thank you and goodbye!");
                         System.exit(0);
 
-
                 }
             }
-
             else {
                 // this is if the value is incorrect
                 System.out.println("You have entered the wrong value!");

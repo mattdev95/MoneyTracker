@@ -10,5 +10,6 @@ public class Main {
         var newCalMoney = new MainMenu(12,12);
         newCalMoney.startMainMenu();
 
+
     }
 }
