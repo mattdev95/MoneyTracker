@@ -70,6 +70,7 @@ public class ExchangeMoney extends MoneyTracker {
             // check the user has entered the right amount of money
             while (!keyInput.hasNextDouble()) {
                 System.out.println("You have entered the wrong input, only numbers!");
+                System.out.print("Please enter the amount of money: ");
                 keyInput.next();
             }
             // if the input is equal a double value

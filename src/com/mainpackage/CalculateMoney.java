@@ -61,6 +61,8 @@ public class CalculateMoney extends MoneyTracker {
             // if the value is not correct
             while (!keyInput.hasNextInt()) {
                 System.out.println("You have entered the wrong input, only numbers!");
+                System.out.print("Please enter the amount of times you need to enter a value: ");
+
                 keyInput.next();
             }
             // set the variable the value if correct
@@ -78,6 +80,7 @@ public class CalculateMoney extends MoneyTracker {
                 // if the input is incorrect
                 while (!keyInput.hasNextDouble()) {
                     System.out.println("You have entered the wrong input, only numbers!");
+                    System.out.print("Please enter your desired value: ");
                     keyInput.next();
                 }
                 // allow the iteration of each of the values
