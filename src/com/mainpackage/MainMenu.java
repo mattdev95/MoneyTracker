@@ -1,6 +1,5 @@
 package com.mainpackage;
 
-import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 
 public class MainMenu extends MoneyTracker {
@@ -18,7 +17,6 @@ public class MainMenu extends MoneyTracker {
             option = keyInput.next();
             // to check if the user entered the correct value
             if (option.contains("1") || option.contains("2") || option.contains("3")) {
-
                 switch (option) {
                     case "1":
                         var newCalMon = new CalculateMoney(2, 2);
@@ -29,26 +27,18 @@ public class MainMenu extends MoneyTracker {
                     case "3":
                         System.out.println("Thank you and goodbye!");
                         System.exit(0);
-
                 }
             }
             else {
                 // this is if the value is incorrect
                 System.out.println("You have entered the wrong value!");
                 startMainMenu();
-
             }
-
-        } catch(InputMismatchException e) {
-            System.out.println("Please re-enter your option!");
-            startMainMenu();
-        } catch(NoSuchElementException r) {
+        } catch(NoSuchElementException e) {
             System.out.println("Please re-enter your option!");
             startMainMenu();
         } finally{
             System.out.println("Unexpected error has occurred");
         }
-
-
     }
 }

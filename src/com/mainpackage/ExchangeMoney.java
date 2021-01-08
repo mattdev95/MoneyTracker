@@ -10,11 +10,9 @@ public class ExchangeMoney extends MoneyTracker {
     public ExchangeMoney(double enterMoney, int timesToEnter) {
         super(enterMoney, timesToEnter);
     }
-
     /*
         This class will have all the methods and functionality to exchange euros to pounds
          */
-
     // allow the user to choose if they want to enter and exchange there own amount of money or use the remaining money
     public void chooseOption(){
         System.out.println("Please choose an option: \n Option 1 - Enter an amount of money to exchange \n " +
@@ -24,7 +22,6 @@ public class ExchangeMoney extends MoneyTracker {
             // allow user to enter an option
             option = keyInput.next();
             if (option.contains("1") || option.contains("2")) {
-
                 switch (option) {
                     case "1":
                         enterAmount();
@@ -44,7 +41,6 @@ public class ExchangeMoney extends MoneyTracker {
 
     }
     public double moneyRemaining(){
-
         // so if they have not calculated the using option 1, they will be directed back to the main menu.
         var newMonTrack = new MoneyTracker(2,2);
         // to check if the user has entered money into option 1
@@ -56,14 +52,11 @@ public class ExchangeMoney extends MoneyTracker {
         }
         return newMonTrack.getRemainingTotal();
     }
-
     // allow the user to enter the amount of money they need
     @Override
     public void enterAmount(){
         // you need to allow entry for the user to enter their dersired amount
-
         try{
-
             // print the remainging amount if it exists
             System.out.print("Please enter the amount of money: ");
 
@@ -90,25 +83,20 @@ public class ExchangeMoney extends MoneyTracker {
         return amount * 0.90;
     }
     // retrieve the amount of money from CalculateMoney class
-
-
     // allow the user to exchange the money of there directed amount, so depending if the user picks option 1,
     // it will use the money entered here or if the user picked option 2, it will calcuate the exchange rate from
     // the amount the user has left from the start.
     private void exchangeMoney(){
         // if the user picked option 1, it will take the money entered and exchanged
-
         try{
             if(option.equals("1")){
                 System.out.println("***************************************************************************************");
                 System.out.println("The exchange money is £" + String.format( "%.2f", findExchangeRate(enteredAmount) )  );
                 System.out.println("***************************************************************************************");
-
             } else {
                 System.out.println("***************************************************************************************");
                 System.out.println("The money you have remaining exchanged into £" +  String.format( "%.2f", findExchangeRate(moneyRemaining())) );
                 System.out.println("***************************************************************************************");
-
             }
             // go back to the main menu
             // add some default values
@@ -118,8 +106,5 @@ public class ExchangeMoney extends MoneyTracker {
             System.out.println("Something has gone wrong");
         }
 
-
     }
-
-
 }

@@ -1,22 +1,17 @@
 package com.mainpackage;
 
-import java.util.Arrays;
 import java.util.InputMismatchException;
 
 public class CalculateMoney extends MoneyTracker {
     // setup your variables
     private double amountMoney;
-
     private  int timeToEnter;
     public double remainingTotal;
     private double total = 0;
     // create an array of values
     private double[] values;
-    // not used
-    private double valueWithVAT;
     // create a money tracker object to access certain methods
     private MoneyTracker newMonTrack = new MoneyTracker(5, 5);
-
     // create the constructor from the parent class
     public CalculateMoney(double enterMoney, int timesToEnter) {
         super(enterMoney, timesToEnter);
@@ -26,7 +21,6 @@ public class CalculateMoney extends MoneyTracker {
         enterAmount();
         enterTimes();
         getResults();
-
     }
     // get the money from the user and then do some magic to it!
     @Override
@@ -42,21 +36,15 @@ public class CalculateMoney extends MoneyTracker {
             }
             // set the variable the value entered
             amountMoney = keyInput.nextDouble();
-
-            // get the amount of money with vat
-            valueWithVAT = amountMoney - calculateVAT();
-
         } catch(InputMismatchException t) {
             System.out.println("You have entered the wrong value!");
             // redo entry only if the while loop does not work
             enterAmount();
         }
-
     }
     // allow entry of the amount of times you want to enter you money into
     private void enterTimes() {
         try {
-
             System.out.print("Please enter the amount of times you need to enter a value: ");
             // if the value is not correct
             while (!keyInput.hasNextInt()) {
@@ -92,7 +80,6 @@ public class CalculateMoney extends MoneyTracker {
             // redo entry
             enterTimes();
         }
-
     }
     // add all the values here
    private double countMoney() {
@@ -110,14 +97,12 @@ public class CalculateMoney extends MoneyTracker {
             remainingTotal = amountMoney - countMoney();
             // set the remaining total
             newMonTrack.setRemainingTotal(remainingTotal);
-
             // check if the user entered too much money to add up the expenditure
             if (remainingTotal > amountMoney || remainingTotal < 0) {
 
                 System.out.println("You have overspend your amount! \n You need to re-enter again!");
                 // reset all the values
                 amountMoney = 0;
-                valueWithVAT = 0;
                 timeToEnter = 0;
                 total = 0;
                 remainingTotal = 0;
@@ -136,9 +121,7 @@ public class CalculateMoney extends MoneyTracker {
         }
         var d = new MainMenu(7, 7);
         d.startMainMenu();
-
     }
-    // using polymorphism here
     @Override
     public double calculateVAT() {
         return amountMoney * 0.2;

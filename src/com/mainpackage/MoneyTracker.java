@@ -10,12 +10,10 @@ public class MoneyTracker {
     private static double remainingTotal;
     // allow the scanner object to be accessed by all the child classes
     public static final Scanner keyInput = new Scanner(System.in);
-
     // set the constructor (more for checking values that are correct, otherwise not needed)
     public MoneyTracker(double enterMoney, int timesToEnter){
         setEnterMoney(enterMoney);
         setTimeToEnter(timesToEnter);
-
     }
     // check the value of money is greater than one and set it the value
     private void setEnterMoney(double enterMoney){
@@ -26,11 +24,6 @@ public class MoneyTracker {
             this.enterMoney = enterMoney;
         }
     }
-    // this method is not needed, just here to show the use of getters
-    private double getEnterMoney(){
-        return enterMoney;
-    }
-
     // check the value of times to enter is a valid number and set it the value
     private void setTimeToEnter(int timesToEnter){
         if(timesToEnter < 1){
@@ -40,11 +33,6 @@ public class MoneyTracker {
             this.timesToEnter = timesToEnter;
         }
     }
-    // this method is not needed, just to show the use of getters
-    private int getTimesToEnter(){
-        return timesToEnter;
-    }
-
     // set the value the money that is remaining and this will be accessed by the child classes
     public void setRemainingTotal(double remainingTotal){
         MoneyTracker.remainingTotal = remainingTotal;
